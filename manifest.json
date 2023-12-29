@@ -3,9 +3,9 @@
   "name": "Google Meet Stopwatch",
   "description": "Google Meetを利用した会議の所要時間を計測・日単位で集計します。",
   "icons": {
-    "16": "src/icon/icon-google-meet-stopwatch-16.png",
-    "48": "src/icon/icon-google-meet-stopwatch-48.png",
-    "128": "src/icon/icon-google-meet-stopwatch-128.png"
+    "16": "src/assets/icon-google-meet-stopwatch-16.png",
+    "48": "src/assets/icon-google-meet-stopwatch-48.png",
+    "128": "src/assets/icon-google-meet-stopwatch-128.png"
   },
   "version": "1.4.0",
   "permissions": [
