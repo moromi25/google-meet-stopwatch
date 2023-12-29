@@ -29,5 +29,8 @@
     "default_title": "Google Meet Stopwatch",
     "default_popup": "src/popup/popup.html"
   },
-  "options_page": "src/options/options.html"
+  "options_page": "src/options/options.html",
+  "background": {
+    "service_worker": "src/js/background.js"
+  }
 }
