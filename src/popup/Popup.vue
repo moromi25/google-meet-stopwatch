@@ -4,7 +4,7 @@
       <span>Google Meetの利用時間</span>
     </div>
     <div class="header-buttons-area">
-      <!--<button id="button-get-local-data" @click="printStorageDataToConsole">データ確認</button>-->
+      <!-- <button id="button-get-local-data" @click="printStorageDataToConsole">データ確認</button> -->
       <button id="button-clear-all" class="clear-button" @click="clearAllDaysRecords">すべて削除する</button>
       <font-awesome-icon id="button-open-config" class="icon-button button-nth" icon="fa-solid fa-gear"
         @click="openOptionPage" title="設定画面を開く" />
@@ -71,7 +71,8 @@ export default {
     },
     deleteSingleDayRecords(date) {
       const KEY_RECORDS = "googleMeetStopWatchRecords"
-      const newRecords = structuredClone(this.googleMeetStopWatchRecords).filter(record => record.date !== date);
+      // const newRecords = structuredClone(this.googleMeetStopWatchRecords).filter(record => record.date !== date);
+      const newRecords = JSON.parse(JSON.stringify(this.googleMeetStopWatchRecords)).filter(record => record.date !== date);
       chrome.storage.local.remove(KEY_RECORDS, () => {
         console.log('【Google Meet Stopwatch Log】temporarily remove all records.');
         chrome.storage.local.set({

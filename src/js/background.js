@@ -14,7 +14,10 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 
 function sortRecordsByDateDesc(originalRecords) {
-  return structuredClone(originalRecords).sort((a, b) =>
+  // return structuredClone(originalRecords).sort((a, b) =>
+  //   a.date > b.date ? -1 : 1
+  // );
+  return JSON.parse(JSON.stringify(originalRecords)).sort((a, b) =>
     a.date > b.date ? -1 : 1
   );
 }
