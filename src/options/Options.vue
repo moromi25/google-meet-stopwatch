@@ -59,7 +59,8 @@ export default {
             this.UpdateStorage();
         },
         UpdateStorage() {
-            const newTags = structuredClone(this.googleMeetStopWatchTags);
+            // const newTags = structuredClone(this.googleMeetStopWatchTags);
+            const newTags = JSON.parse(JSON.stringify(this.googleMeetStopWatchTags));
             const KEY_TAGS = "googleMeetStopWatchTags";
             chrome.storage.local.set({ [KEY_TAGS]: newTags }).then(() => {
                 console.log("【Google Meet Stopwatch] Tags are saved.");

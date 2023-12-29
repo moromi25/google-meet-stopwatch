@@ -8,6 +8,9 @@
     "128": "src/icon/icon-google-meet-stopwatch-128.png"
   },
   "version": "1.4.0",
+  "permissions": [
+    "storage"
+  ],
   "content_scripts": [
     {
       "matches": [

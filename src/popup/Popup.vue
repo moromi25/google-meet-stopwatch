@@ -38,19 +38,19 @@ export default {
   data: function () {
     return {
       // Inject into the current component
-      config: $config,
+      // config: $config,
       googleMeetStopWatchRecords: [],
       googleMeetStopWatchTags: {}
     }
   },
   beforeMount() {
     const KEY_RECORDS = "googleMeetStopWatchRecords";
-    fetch('http://localhost:3000/googleMeetStopWatchRecords')
-      .then(res => res.json())
-      .then(res => this.googleMeetStopWatchRecords = res[KEY_RECORDS] || []; )
-    // chrome.storage.local.get(KEY_RECORDS, (result) => {
-    //   this.googleMeetStopWatchRecords = result[KEY_RECORDS] || [];
-    // });
+    // fetch('http://localhost:3000/googleMeetStopWatchRecords')
+    //   .then(res => res.json())
+    //   .then(res => this.googleMeetStopWatchRecords = res[KEY_RECORDS] || []);
+    chrome.storage.local.get(KEY_RECORDS, (result) => {
+      this.googleMeetStopWatchRecords = result[KEY_RECORDS] || [];
+    });
 
     const KEY_TAGS = "googleMeetStopWatchTags";
     chrome.storage.local.get(KEY_TAGS, (result) => {
