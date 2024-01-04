@@ -1,13 +1,9 @@
-// Vite ver
 let googleMeetStopWatchApp = {};
 
 window.addEventListener("load", () => {
   googleMeetStopWatchApp.startTime = new Date();
-  document.addEventListener("click", function (e) {
-    if (e.target.classList.contains("NHaLPe")) {
-      recordMeetingTime();
-    }
-  });
+  bindHangUpEvent();
+
   // chrome.runtime.sendMessage({status: "start"});
 });
 
@@ -27,11 +23,30 @@ function recordMeetingTime() {
     googleMeetStopWatchApp.endTime - googleMeetStopWatchApp.startTime
   );
   data.elapsedTime = calculateElapsedTime(data.actualTime);
-  data.meetingTitle = getMeetingTitle();
+
+  data.meetingTitle = googleMeetStopWatchApp.meetingTitle;
   data.meetUrl = location.origin + location.pathname;
+
   saveToStorage(data);
   outputConsoleLog(data);
   delete googleMeetStopWatchApp.startTime;
+}
+
+function bindHangUpEvent() {
+  let mutationObserver = new MutationObserver(function () {
+    const targets = document.querySelectorAll(".NHaLPe");
+    if (targets.length > 0) {
+      targets.forEach(function (target) {
+        target.addEventListener("click", recordMeetingTime);
+      });
+      googleMeetStopWatchApp.meetingTitle = getMeetingTitle();
+      mutationObserver.disconnect();
+    }
+  });
+  mutationObserver.observe(document.getElementById("yDmH0d"), {
+    childList: true,
+    subtree: true,
+  });
 }
 
 function makeZeroFilledDate() {
@@ -90,7 +105,7 @@ function saveToStorage(data) {
     recordDetails.push({
       id: Date.now(),
       elapsedTime: data.elapsedTime,
-      meetingTitle: getMeetingTitle(),
+      meetingTitle: data.meetingTitle,
     });
 
     let newRecordsPerDate = {
@@ -174,7 +189,6 @@ function calculateElapsedTime(actualTime) {
 }
 
 function outputConsoleLog(data) {
-  const meetingTitle = getMeetingTitle();
   if (data.elapsedTime === 0) {
     console.log(
       "ミーティング【" +
