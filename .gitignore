@@ -24,3 +24,5 @@ google-meet-stopwatch
 *.njsproj
 *.sln
 *.sw?
+
+google-meet-stopwatch*.zip

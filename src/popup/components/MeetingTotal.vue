@@ -1,8 +1,8 @@
 <template>
     <div class="meeting-total-block">
         <template v-for="tag in tags" :key="tag">
-            <div v-if="matched(tag)" class="meeting-total-detail-row" title="{{tag.title}} : {{calcTagTotalTime(tag)}} 分">{{
-                tag.title }} : {{ calcTagTotalTime(tag) }} 分
+            <div v-if="matched(tag)" class="meeting-total-detail-row" :title="calcAndFormatTagTotalTime(tag)">
+                {{ calcAndFormatTagTotalTime(tag) }}
             </div>
         </template>
         <div v-if="noneMatched" class="meeting-total-detail-row" :title="formatNoTagsTime">{{ formatNoTagsTime }}</div>
@@ -42,11 +42,12 @@ export default {
             const tagList = Object.values(this.tags).map(t => t);
             return tagList.some(tag => this.details.some(detail => tag.keywords.findIndex(keyword => { return detail.meetingTitle.indexOf(keyword) > -1 }) === -1));
         },
-        calcTagTotalTime() {
+        calcAndFormatTagTotalTime() {
             const self_ = this;
             return function (tag) {
                 const matchedDetails = self_.details.filter(detail => tag.keywords.findIndex(keyword => { return detail.meetingTitle.indexOf(keyword) > -1 }) > -1);
-                return matchedDetails.reduce((accum, detail) => (accum + detail.elapsedTime), 0);
+                const totalTime = matchedDetails.reduce((accum, detail) => (accum + detail.elapsedTime), 0)
+                return tag.title + " : " + this.formatTime(totalTime);
             };
         },
         calcTotalTime() {
