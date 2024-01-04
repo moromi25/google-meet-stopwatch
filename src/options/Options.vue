@@ -8,6 +8,7 @@
                 タグにキーワードを紐づけることで、キーワードに部分一致するミーティング名をグルーピングできます。
             </div>
             <!--
+            <button id="add-sample-records-for-debug" @click="addSampleRecordsForDebag">addRecords</button>
             <button id="restore-tags-for-debug" @click="restoreTagsForDebug">restore</button>
             <button id="get-storage-data-for-debug" @click="getStorageDataForDebug">getStorageData</button>
             -->
@@ -72,7 +73,6 @@ export default {
             });
         },
         restoreTagsForDebug() {
-            // >> for RESTORE start
             const KEY_TAGS = "googleMeetStopWatchTags";
             chrome.storage.local.remove(KEY_TAGS);
             const TAGS = {
@@ -105,7 +105,70 @@ export default {
                     this.googleMeetStopWatchTags = result[KEY_TAGS];
                 });
             });
-            // >> for RESTORE end
+        },
+        addSampleRecordsForDebag() {
+            const KEY = "googleMeetStopWatchRecords";
+            const RECORDS = [
+                {
+                    date: "20220415",
+                    formattedDate: "2022年4月15日(金)",
+                    details: [
+                        {
+                            id: "20220415-1",
+                            elapsedTime: 5,
+                            meetingTitle: "チームDaily",
+                        },
+                        {
+                            id: "20220415-2",
+                            elapsedTime: 25,
+                            meetingTitle: "OneOnOne",
+                        },
+                        {
+                            id: "20220415-3",
+                            elapsedTime: 93,
+                            meetingTitle: "設計レビュー",
+                        },
+                    ],
+                },
+                {
+                    date: "20220413",
+                    formattedDate: "2022年4月13日(水)",
+                    details: [
+                        {
+                            id: "20220413-1",
+                            elapsedTime: 27,
+                            meetingTitle: "チームDaily",
+                        },
+                    ],
+                },
+                {
+                    date: "20220414",
+                    formattedDate: "2022年4月14日(木)",
+                    details: [
+                        {
+                            id: "20220414-1",
+                            elapsedTime: 5,
+                            meetingTitle: "チームDaily",
+                        },
+                        {
+                            id: "20220414-2",
+                            elapsedTime: 25,
+                            meetingTitle: "修正内容レビュー",
+                        },
+                        {
+                            id: "20220414-3",
+                            elapsedTime: 56,
+                            meetingTitle: "設計レビュー(プレ)",
+                        },
+                    ],
+                },
+            ];
+            chrome.storage.local.set({ [KEY]: RECORDS }, (result) => {
+                chrome.storage.local.get(KEY, function (result) {
+                    console.log("【Google Meet Stopwatch Log】sample records:");
+                    console.table(result[KEY]);
+                });
+            });
         },
         getStorageDataForDebug() {
             const KEY_TAGS = "googleMeetStopWatchTags";
