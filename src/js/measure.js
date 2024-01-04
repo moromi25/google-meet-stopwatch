@@ -134,44 +134,6 @@ function saveToStorage(data) {
   });
 }
 
-/**
- * @deprecated v1.3.0～
- * {
- *   googleMeetStopWatchRecords: {
- *     20220415: [{
- *       date: 20220415,
- *       formattedDate: '2022年4月15日(金)'
- *       actualTime: 300(ms),
- *       elapsedTime: 5(min)
- *       meetingTitle: 'xxx',
- *       meetingUrl: 'xxx'
- *     ],
- *     20220414: [{
- *       ...
- *     ],
- *     ...
- *   }
- * @param {*} data
- */
-function saveToStorageV1(data) {
-  const KEY = "googleMeetStopWatchRecords";
-  const keyPerDate = data.date;
-  chrome.storage.local.get(KEY, (recordsV2) => {
-    let allRecords = recordsV2[KEY] || {};
-    let recordsPerDate = allRecords[keyPerDate] || [];
-    recordsPerDate.push(data);
-    allRecords[keyPerDate] = recordsPerDate;
-
-    const newAllRecords = {};
-    newAllRecords[KEY] = allRecords;
-    chrome.storage.local.set(newAllRecords, () => {
-      chrome.storage.local.get(KEY, function (recordsV2) {
-        console.log("【Google Meet Stopwatch Log】" + recordsV2[KEY]);
-      });
-    });
-  });
-}
-
 function getMeetingTitle() {
   const meetingTitleCandidate = document.querySelector("[data-meeting-title]");
   if (meetingTitleCandidate && meetingTitleCandidate.dataset.meetingTitle) {
