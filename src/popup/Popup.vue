@@ -115,7 +115,7 @@ button:hover {
 }
 
 .button-nth {
-  margin-left: 8px;
+  margin-left: 12px;
 }
 
 .header-area {
@@ -132,14 +132,14 @@ button:hover {
 
 .title-area {
   display: flex;
-  flex-basis: 65%;
+  flex-basis: 60%;
   align-items: center;
   font-size: 24px;
 }
 
 .header-buttons-area {
   display: flex;
-  flex-basis: 35%;
+  flex-basis: 40%;
   justify-content: flex-end;
   align-items: center;
 }
@@ -153,18 +153,5 @@ button:hover {
 
 .header-buttons-area i:hover {
   color: #aaa;
-}
-
-.data-area {
-  display: flex;
-  width: 100%;
-  padding-top: 55px;
-  margin: 8px 0 16px 0;
-}
-
-.meeting-list {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
 }
 </style>
