@@ -1,17 +1,17 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from "vue";
+import App from "./App.vue";
 
 /* import the fontawesome core */
-import { library } from '@fortawesome/fontawesome-svg-core'
+import { library } from "@fortawesome/fontawesome-svg-core";
 /* import font awesome icon component */
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 /* import specific icons */
-import { faGear } from '@fortawesome/free-solid-svg-icons'
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import {
+  faGear,
+  faXmark,
+  faRotateRight,
+} from "@fortawesome/free-solid-svg-icons";
 /* add icons to the library */
-library.add(faGear)
-library.add(faXmark)
+library.add(faGear, faXmark, faRotateRight);
 
-createApp(App)
-.component('font-awesome-icon', FontAwesomeIcon)
-.mount('#popup')
+createApp(App).component("font-awesome-icon", FontAwesomeIcon).mount("#popup");

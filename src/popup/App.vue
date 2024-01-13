@@ -1,5 +1,5 @@
 <template>
-  <MeetingTimePopup/>
+  <MeetingTimePopup />
 </template>
 
 <script>
