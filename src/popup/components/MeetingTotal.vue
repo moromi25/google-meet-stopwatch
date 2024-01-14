@@ -29,19 +29,18 @@ export default {
                 });
             };
         },
+        noneMatched() {
+            return this.calcNoTagsTime > 0;
+        },
         calcNoTagsTime() {
             const keywords = this.concatAllKeywords();
             return this.details
-                .filter(detail => keywords.every(keyword => detail.meetingTitle && detail.meetingTitle.indexOf(keyword) === -1))
+                .filter(detail => keywords.every(keyword => detail.meetingTitle == null || (detail.meetingTitle && detail.meetingTitle.indexOf(keyword) === -1)))
                 .map(d => d.elapsedTime)
                 .reduce((accum, time) => (accum + time), 0);
         },
         formatNoTagsTime() {
-            return 'No tag : ' + this.formatTime(this.calcNoTagsTime);
-        },
-        noneMatched() {
-            const tagList = Object.values(this.tags).map(t => t);
-            return tagList.some(tag => this.details.some(detail => tag.keywords.findIndex(keyword => { return detail.meetingTitle.indexOf(keyword) > -1 }) === -1));
+            return '（タグなし） : ' + this.formatTime(this.calcNoTagsTime);
         },
         calcAndFormatTagTotalTime() {
             const self_ = this;
