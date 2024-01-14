@@ -10,8 +10,9 @@ import {
   faGear,
   faXmark,
   faRotateRight,
+  faStopwatch,
 } from "@fortawesome/free-solid-svg-icons";
 /* add icons to the library */
-library.add(faGear, faXmark, faRotateRight);
+library.add(faGear, faXmark, faRotateRight, faStopwatch);
 
 createApp(App).component("font-awesome-icon", FontAwesomeIcon).mount("#popup");
