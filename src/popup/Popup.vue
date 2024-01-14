@@ -44,11 +44,6 @@ export default {
       this.googleMeetStopWatchTags = result[KEY_TAGS] || {};
     });
   },
-  computed: {
-    hasRecords() {
-      return this.googleMeetStopWatchRecords.length > 0;
-    },
-  },
   methods: {
     reload() {
       console.log("reloaded count: " + ++this.reloadedCount);

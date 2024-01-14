@@ -21,17 +21,18 @@ export default {
         matched() {
             const self_ = this;
             return function (tag) {
-                // console.log("tag:")
-                // console.table(tag);
-                // console.log("self_.details:")
-                // console.table(self_.details);
-                return self_.details.some(detail => tag.keywords.findIndex(keyword => { return detail.meetingTitle.indexOf(keyword) > -1 }) > -1);
+                return self_.details.some(detail => {
+                    if (!detail.meetingTitle) {
+                        return false;
+                    }
+                    return tag.keywords.some(keyword => detail.meetingTitle.includes(keyword));
+                });
             };
         },
         calcNoTagsTime() {
             const keywords = this.concatAllKeywords();
             return this.details
-                .filter(detail => keywords.every(keyword => detail.meetingTitle.indexOf(keyword) === -1))
+                .filter(detail => keywords.every(keyword => detail.meetingTitle && detail.meetingTitle.indexOf(keyword) === -1))
                 .map(d => d.elapsedTime)
                 .reduce((accum, time) => (accum + time), 0);
         },
@@ -45,7 +46,7 @@ export default {
         calcAndFormatTagTotalTime() {
             const self_ = this;
             return function (tag) {
-                const matchedDetails = self_.details.filter(detail => tag.keywords.findIndex(keyword => { return detail.meetingTitle.indexOf(keyword) > -1 }) > -1);
+                const matchedDetails = self_.details.filter(detail => tag.keywords.findIndex(keyword => { return detail.meetingTitle && detail.meetingTitle.indexOf(keyword) > -1 }) > -1);
                 const totalTime = matchedDetails.reduce((accum, detail) => (accum + detail.elapsedTime), 0)
                 return tag.title + " : " + this.formatTime(totalTime);
             };

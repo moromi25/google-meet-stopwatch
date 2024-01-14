@@ -8,7 +8,7 @@
                 タグにキーワードを紐づけることで、キーワードに部分一致するミーティング名をグルーピングできます。
             </div>
             <!--
-            <button id="add-sample-records-for-debug" @click="addSampleRecordsForDebag">addRecords</button>
+            <button id="add-sample-records-for-debug" @click="addSampleRecordsForDebug">addRecords</button>
             <button id="restore-tags-for-debug" @click="restoreTagsForDebug">restore</button>
             <button id="get-storage-data-for-debug" @click="getStorageDataForDebug">getStorageData</button>
             -->
@@ -106,7 +106,7 @@ export default {
                 });
             });
         },
-        addSampleRecordsForDebag() {
+        addSampleRecordsForDebug() {
             const KEY = "googleMeetStopWatchRecords";
             const RECORDS = [
                 {
@@ -127,6 +127,11 @@ export default {
                             id: "20220415-3",
                             elapsedTime: 93,
                             meetingTitle: "設計レビュー",
+                        },
+                        {
+                            id: "20220415-3",
+                            elapsedTime: 93,
+                            meetingTitle: undefined,
                         },
                     ],
                 },
