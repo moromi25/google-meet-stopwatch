@@ -39,7 +39,7 @@ export default {
         },
         findTagByMeetingTitle() {
             const tag = Object.values(this.tags).map(t => t).find(detail => {
-                return detail.keywords.findIndex(keyword => { return this.detail.meetingTitle.indexOf(keyword) > -1 }) > -1;
+                return detail.keywords.findIndex(keyword => { return this.detail.meetingTitle && this.detail.meetingTitle.indexOf(keyword) > -1 }) > -1;
             });
             return tag === undefined ? this.noTagKey : tag.title;
         }

@@ -94,6 +94,8 @@ function makeFormattedDate() {
  * @param {*} data
  */
 function saveToStorage(data) {
+  if (data.meetingTitle == null) return;
+
   const KEY = "googleMeetStopWatchRecords";
   const keyPerDate = data.date;
   chrome.storage.local.get(KEY).then((records) => {
@@ -136,7 +138,11 @@ function saveToStorage(data) {
 
 function getMeetingTitle() {
   const meetingTitleCandidate = document.querySelector("[data-meeting-title]");
-  if (meetingTitleCandidate && meetingTitleCandidate.dataset.meetingTitle) {
+  if (
+    meetingTitleCandidate &&
+    meetingTitleCandidate.dataset.meetingTitle != null &&
+    meetingTitleCandidate.dataset.meetingTitle !== ""
+  ) {
     return meetingTitleCandidate.dataset.meetingTitle;
   }
   return location.pathname;
