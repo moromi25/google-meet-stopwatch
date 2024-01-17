@@ -2,7 +2,12 @@
     <ul class="meeting-detail-list">
         <li class="meeting-detail-row">
             <div class="meeting-title-cell meeting-detail-cell">
-                <div class="meeting-title" :title="detail.meetingTitle">{{ detail.meetingTitle }}</div>
+                <template v-if="detail.meetingTitle == null">
+                    <div class="meeting-title" title="（ミーティング名称なし）">（ミーティング名称なし）</div>
+                </template>
+                <template v-else>
+                    <div class="meeting-title" :title="detail.meetingTitle">{{ detail.meetingTitle }}</div>
+                </template>
             </div>
             <div class="meeting-tag-cell meeting-detail-cell">
                 <div v-if="findTagByMeetingTitle !== noTagKey" class="meeting-tag" :title="findTagByMeetingTitle">
