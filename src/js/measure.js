@@ -40,6 +40,10 @@ function bindHangUpEvent() {
         target.addEventListener("click", recordMeetingTime);
       });
       googleMeetStopWatchApp.meetingTitle = getMeetingTitle();
+      console.log(
+        "【Google Meet Stopwatch Log】meegint title: " +
+          googleMeetStopWatchApp.meetingTitle
+      );
       mutationObserver.disconnect();
     }
   });
@@ -94,7 +98,10 @@ function makeFormattedDate() {
  * @param {*} data
  */
 function saveToStorage(data) {
-  if (data.meetingTitle == null) return;
+  if (googleMeetStopWatchApp.meetingTitle == null) {
+    // 一応再取得
+    googleMeetStopWatchApp.meetingTitle = getMeetingTitle();
+  }
 
   const KEY = "googleMeetStopWatchRecords";
   const keyPerDate = data.date;
@@ -107,7 +114,7 @@ function saveToStorage(data) {
     recordDetails.push({
       id: Date.now(),
       elapsedTime: data.elapsedTime,
-      meetingTitle: data.meetingTitle,
+      meetingTitle: googleMeetStopWatchApp.meetingTitle,
     });
 
     let newRecordsPerDate = {
