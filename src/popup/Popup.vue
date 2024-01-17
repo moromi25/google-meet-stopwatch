@@ -46,10 +46,10 @@ export default {
   },
   methods: {
     reload() {
-      console.log("reloaded count: " + ++this.reloadedCount);
-      console.log("records:");
+      console.log("【Google Meet Stopwatch Log】reloaded count: " + ++this.reloadedCount);
+      console.log("【Google Meet Stopwatch Log】records:");
       console.table(this.googleMeetStopWatchRecords);
-      console.log("tags:");
+      console.log("【Google Meet Stopwatch Log】tags:");
       console.table(this.googleMeetStopWatchTags);
     },
     clearAllDaysRecords() {
