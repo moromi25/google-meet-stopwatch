@@ -34,6 +34,7 @@ function recordMeetingTime() {
 
 function bindHangUpEvent() {
   let mutationObserver = new MutationObserver(function () {
+    console.log("【Google Meet Stopwatch Log】start getting meeting title...");
     const targets = document.querySelectorAll(".NHaLPe");
     if (targets.length > 0) {
       targets.forEach(function (target) {
@@ -41,7 +42,7 @@ function bindHangUpEvent() {
       });
       googleMeetStopWatchApp.meetingTitle = getMeetingTitle();
       console.log(
-        "【Google Meet Stopwatch Log】meegint title: " +
+        "【Google Meet Stopwatch Log】meeting title: " +
           googleMeetStopWatchApp.meetingTitle
       );
       mutationObserver.disconnect();
@@ -100,7 +101,14 @@ function makeFormattedDate() {
 function saveToStorage(data) {
   if (googleMeetStopWatchApp.meetingTitle == null) {
     // 一応再取得
+    console.log(
+      "【Google Meet Stopwatch Log】Could not get the meeting title. Let's re-try to get meeting title..."
+    );
     googleMeetStopWatchApp.meetingTitle = getMeetingTitle();
+    console.log(
+      "【Google Meet Stopwatch Log】meeting title: " +
+        googleMeetStopWatchApp.meetingTitle
+    );
   }
 
   const KEY = "googleMeetStopWatchRecords";
