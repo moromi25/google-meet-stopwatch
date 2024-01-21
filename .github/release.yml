@@ -15,6 +15,9 @@ changelog:
     - title: Bug Fix 💊
       labels:
         - bug
+    - title: Refactoring :hammer:
+      labels:
+        - refactoring
     - title: Other Changes
       labels:
         - "*"
